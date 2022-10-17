@@ -21,19 +21,19 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ProductTypeService implements IProductTypeService<ProductTypeDto, ProductTypeDto>{
     @Autowired
-    private final IProductTypeRepository productTypeRepository;
+    private final IProductTypeRepository repository;
     @Override
     public Flux<ProductTypeDto> getAll()
     {
         IProductTypeMapper mapper = new ProductTypeMapper();
-        return productTypeRepository.findAll()
+        return repository.findAll()
                 .map(mapper::toDto);
     }
     @Override
     public Mono<ProductTypeDto> getById(String id)
     {
         IProductTypeMapper mapper = new ProductTypeMapper();
-        return productTypeRepository.findById(id)
+        return repository.findById(id)
                 .map(mapper::toDto);
     }
     @Override
@@ -41,24 +41,24 @@ public class ProductTypeService implements IProductTypeService<ProductTypeDto, P
     {
         IProductTypeMapper mapper = new ProductTypeMapper();
         return object.map(mapper::toEntity)
-                .flatMap(productTypeRepository::insert)
+                .flatMap(repository::insert)
                 .map(mapper::toDto);
     }
     @Override
     public Mono<ProductTypeDto> update(Mono<ProductTypeDto> object, String id)
     {
         IProductTypeMapper mapper = new ProductTypeMapper();
-        return productTypeRepository.findById(id)
+        return repository.findById(id)
                 .flatMap(
                         p -> object.map(mapper::toEntity)
                                 .doOnNext(e -> e.setId(id))
                 )
-                .flatMap(productTypeRepository::save)
+                .flatMap(repository::save)
                 .map(mapper::toDto);
     }
     @Override
     public Mono<Void> delete(String id)
     {
-        return productTypeRepository.deleteById(id);
+        return repository.deleteById(id);
     }
 }

@@ -18,3 +18,4 @@ server:
 message:
   path-product: /api/v1/products
   path-productType: /api/v1/productTypes
+  uri: /api/v1/productTypes/
