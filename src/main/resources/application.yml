@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: service-product
+  data:
+    mongodb:
+      database: bootcamp_product_db
+      host: localhost
+      port: 8092
+  config:
+    import: optional:configserver:http://localhost:8888
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+server:
+  port: 8001
+message:
+  path-product: /api/v1/products
+  path-productType: /api/v1/productTypes

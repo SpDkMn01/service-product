@@ -1,0 +1,20 @@
+package com.nttdata.bootcamp.project.Product.utils;
+
+import com.nttdata.bootcamp.project.Product.dto.ProductTypeDto;
+import com.nttdata.bootcamp.project.Product.entity.ProductType;
+import org.springframework.beans.BeanUtils;
+
+public class ProductTypeMapper implements IProductTypeMapper {
+    @Override
+    public ProductTypeDto toDto(ProductType productType){
+        ProductTypeDto productTypeDto = new ProductTypeDto();
+        BeanUtils.copyProperties(productType, productTypeDto);
+        return productTypeDto;
+    }
+    @Override
+    public ProductType toEntity(ProductTypeDto productTypeDto){
+        ProductType productType = new ProductType();
+        BeanUtils.copyProperties(productTypeDto, productType);
+        return productType;
+    }
+}
