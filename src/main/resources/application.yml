@@ -4,18 +4,22 @@ spring:
   data:
     mongodb:
       database: bootcamp_product_db
-      host: localhost
-      port: 8901
+      host: db_product
+      port: 27017
   config:
-    import: optional:configserver:http://localhost:9080
+    import: optional:configserver:http://192.168.31.220:8002
 management:
   endpoints:
     web:
       exposure:
         include: "*"
 server:
-  port: 8001
+  port: 8000
 message:
   path-product: /api/v1/products
   path-productType: /api/v1/productTypes
   uri: /api/v1/productTypes/
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.31.220:8000/eureka/
